@@ -32,7 +32,7 @@ void gpio_enable_port(gpio_port_t port) {
 
 void gpio_pin_mode(gpio_pin_t pin, gpio_pin_mode_t mode) {
 	uint8_t pin_nr = pin & 0xff;
- 	uint8_t mod, cnf;
+ 	uint8_t mod = 0, cnf = 0;
 	uint32_t val, mask;
 	bool lowpin = (pin_nr < 8);
 	GPIO_TypeDef * gpio = gpio_gpio(pin);
