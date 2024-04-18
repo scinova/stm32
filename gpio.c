@@ -10,7 +10,7 @@ GPIO_TypeDef * _GPIOX[] = {
 };
 
 GPIO_TypeDef * gpio_gpio(gpio_pin_t pin) {
-  return _GPIOX[pin >> 16];
+	return _GPIOX[pin >> 16];
 }
 
 void gpio_enable_port(gpio_port_t port) {
@@ -23,11 +23,11 @@ void gpio_enable_port(gpio_port_t port) {
 			break;
 		case PC:
 			RCC->APB2ENR |= RCC_APB2ENR_IOPCEN;
-      break;
+			break;
 		case PD:
 			RCC->APB2ENR |= RCC_APB2ENR_IOPDEN;
 			break;
-  }
+	}
 }
 
 void gpio_pin_mode(gpio_pin_t pin, gpio_pin_mode_t mode) {
@@ -75,14 +75,14 @@ void gpio_pin_mode(gpio_pin_t pin, gpio_pin_mode_t mode) {
 
 void gpio_pin_set(gpio_pin_t pin) {
 	GPIO_TypeDef * gpio = gpio_gpio(pin);
-  uint8_t pin_nr = pin & 0xf;
-  gpio->BSRR |= 1 << pin_nr;
+	uint8_t pin_nr = pin & 0xf;
+	gpio->BSRR |= 1 << pin_nr;
 }
 
 void gpio_pin_clear(gpio_pin_t pin) {
 	GPIO_TypeDef * gpio = gpio_gpio(pin);
-  uint8_t pin_nr = pin & 0xf;
-  gpio->BRR |= 1 << pin_nr;
+	uint8_t pin_nr = pin & 0xf;
+	gpio->BRR |= 1 << pin_nr;
 }
 
 void gpio_pin_write(gpio_pin_t pin, bool value) {

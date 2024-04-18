@@ -5,7 +5,7 @@
 static volatile uint32_t _system_ticks;
 
 void SysTick_Handler() {
-  _system_ticks++;
+	_system_ticks++;
 }
 
 uint32_t system_ticks() {
@@ -26,11 +26,11 @@ void system_set_hse_72mhz_clock() {
 	RCC->CR |= RCC_CR_PLLON;
 	while (!(RCC->CR & RCC_CR_PLLRDY));
 	RCC->CFGR |= RCC_CFGR_SW_PLL; // PLL as system clock source
-  SystemCoreClockUpdate();
+	SystemCoreClockUpdate();
 }
 
 void system_init(void) {
 	system_set_hse_72mhz_clock();
-  SysTick_Config(SystemCoreClock / 1000);
-  __enable_irq();
+	SysTick_Config(SystemCoreClock / 1000);
+	__enable_irq();
 }

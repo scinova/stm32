@@ -7,7 +7,7 @@
 #define MOSI 7 // 5
 
 void spi_enable() {
-  RCC->APB2ENR |= RCC_APB2ENR_IOPAEN // port clock
+	RCC->APB2ENR |= RCC_APB2ENR_IOPAEN // port clock
 			| RCC_APB2ENR_AFIOEN // alt function clock
 			| RCC_APB2ENR_SPI1EN; //	spi clock
 	GPIOA->CRL &= 0x000FFFFF;
@@ -20,7 +20,7 @@ void spi_enable() {
 
 void spi_disable() {
 	SPI1->CR1 = 0;
-  RCC->APB2ENR &= ~RCC_APB2ENR_SPI1EN;
+	RCC->APB2ENR &= ~RCC_APB2ENR_SPI1EN;
 }
 
 uint8_t spi_transfer8(uint8_t data) {

@@ -112,19 +112,19 @@ typedef enum {
 #define NL 0b00111111
 
 static void cslow() {
-  gpio_pin_clear(CSPIN);
+	gpio_pin_clear(CSPIN);
 }
 
 static void cshigh() {
-  gpio_pin_set(CSPIN);
+	gpio_pin_set(CSPIN);
 }
 
 static void dclow() {
-  gpio_pin_clear(DCPIN);
+	gpio_pin_clear(DCPIN);
 }
 
 static void dchigh() {
-  gpio_pin_set(DCPIN);
+	gpio_pin_set(DCPIN);
 }
 
 static void transmit_command(ili9341_command_t cmd) {
@@ -181,8 +181,8 @@ static void command4(uint8_t cmd, uint8_t p1, uint8_t p2, uint8_t p3, uint8_t p4
 }
 
 void ili9341_enable() {
-  gpio_pin_mode(CSPIN, OUTPUT);
-  gpio_pin_mode(DCPIN, OUTPUT);
+	gpio_pin_mode(CSPIN, OUTPUT);
+	gpio_pin_mode(DCPIN, OUTPUT);
 	command(SOFTWARE_RESET);
 	//_delay_ms(50);
 	command(DISPLAY_OFF);
