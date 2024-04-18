@@ -111,36 +111,43 @@ typedef enum {
 //
 #define NL 0b00111111
 
-
-static void setcs(bool value) {
-  gpio_pin_write(CSPIN, value);
+static void cslow() {
+  gpio_pin_clear(CSPIN);
 }
 
-static void setdc(bool value) {
-  gpio_pin_write(DCPIN, value);
+static void cshigh() {
+  gpio_pin_set(CSPIN);
+}
+
+static void dclow() {
+  gpio_pin_clear(DCPIN);
+}
+
+static void dchigh() {
+  gpio_pin_set(DCPIN);
 }
 
 static void transmit_command(ili9341_command_t cmd) {
-	setdc(false);
-	setcs(false);
+	dclow();
+	cslow();
 	spi_transfer8(cmd);
-	setcs(true);
-	setdc(true);
+	cshigh();
+	dchigh();
 }
 
 static void transmit_data(uint8_t data) {
-	setdc(true);
-	setcs(false);
+	dchigh();
+	cslow();
 	spi_transfer8(data);
-	setcs(true);
+	cshigh();
 }
 
 static void transmit_data16(uint16_t data) {
-	setdc(true);
-	setcs(false);
+	dchigh();
+	cslow();
 	spi_transfer8((uint8_t)(data >> 8));
 	spi_transfer8(data );
-	setcs(true);
+	cshigh();
 }
 
 static void command(uint8_t cmd) {
