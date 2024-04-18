@@ -85,10 +85,16 @@ typedef enum {
   PD15 = (PD << 16) + 0x0F,
 } gpio_pin_t;
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 void gpio_enable_port(gpio_port_t port);
 void gpio_disable_port(gpio_port_t port);
 void gpio_pin_mode(gpio_pin_t pin, gpio_pin_mode_t mode);
 void gpio_pin_set(gpio_pin_t pin);
 void gpio_pin_clear(gpio_pin_t pin);
 void gpio_pin_write(gpio_pin_t pin, bool value);
+#ifdef __cplusplus
+}
+#endif
 #endif
