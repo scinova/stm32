@@ -84,3 +84,10 @@ void gpio_pin_clear(gpio_pin_t pin) {
   uint8_t pin_nr = pin & 0xf;
   gpio->BRR |= 1 << pin_nr;
 }
+
+void gpio_pin_write(gpio_pin_t pin, bool value) {
+	if (value)
+		gpio_pin_set(pin);
+	else
+		gpio_pin_clear(pin);
+}
