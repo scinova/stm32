@@ -32,6 +32,7 @@ void system_init(void) {
 }
 
 int main() {
+	system_init();
 	setup();
 	while (1)
 		loop();

@@ -65,7 +65,7 @@ void uart_write(uint8_t * data, uint8_t len) {
 }
 
 void uart_print(uint8_t * data) {
-	//uart_write(data, strlen((char *)data));
+	uart_write(data, strlen((char *)data));
 }
 
 bool uart_data_is_available() {
