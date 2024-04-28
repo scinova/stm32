@@ -1,7 +1,4 @@
 #include <stm32f1xx.h>
-//#include <stdint.h>
-//#include <stdbool.h>
-#include <string.h>
 #include "uart.h"
 
 static uint8_t tx_buffer[UART_TX_BUFFER_SIZE + 1];
@@ -68,7 +65,7 @@ void uart_write(uint8_t * data, uint8_t len) {
 }
 
 void uart_print(uint8_t * data) {
-	uart_write(data, strlen((char *)data));
+	//uart_write(data, strlen((char *)data));
 }
 
 bool uart_data_is_available() {

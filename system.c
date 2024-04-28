@@ -1,6 +1,6 @@
 #include <stm32f1xx.h>
-#include <stdint.h>
 #include "system.h"
+#include <stdint.h>
 
 static volatile uint32_t _system_ticks;
 
@@ -15,7 +15,7 @@ uint32_t system_ticks() {
 	return v;
 }
 
-void system_set_hse_72mhz_clock() {
+void system_init(void) {
 	FLASH->ACR &=~FLASH_ACR_LATENCY_0; // latency 2 wait states
 	FLASH->ACR |= FLASH_ACR_LATENCY_1;
 	RCC->CR |= RCC_CR_HSEON; // enable hse
@@ -27,10 +27,12 @@ void system_set_hse_72mhz_clock() {
 	while (!(RCC->CR & RCC_CR_PLLRDY));
 	RCC->CFGR |= RCC_CFGR_SW_PLL; // PLL as system clock source
 	SystemCoreClockUpdate();
-}
-
-void system_init(void) {
-	system_set_hse_72mhz_clock();
 	SysTick_Config(SystemCoreClock / 1000);
 	__enable_irq();
+}
+
+int main() {
+	setup();
+	while (1)
+		loop();
 }

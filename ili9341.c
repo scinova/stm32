@@ -1,13 +1,13 @@
 #include "ili9341.h"
-#include <stdint.h>
-#include <stdbool.h>
 #include "gpio.h"
 #include "spi.h"
+#include <stdint.h>
+#include <stdbool.h>
 
 #define BIT(x) (1<<x)
 
-#define CSPIN PA4
-#define DCPIN PA3
+pin_t _cspin;
+pin_t _dcpin;
 
 typedef enum {
 	NOP = 0x00,
@@ -112,19 +112,19 @@ typedef enum {
 #define NL 0b00111111
 
 static void cslow() {
-	gpio_pin_clear(CSPIN);
+  pin_reset(_cspin);
 }
 
 static void cshigh() {
-	gpio_pin_set(CSPIN);
+  pin_set(_cspin);
 }
 
 static void dclow() {
-	gpio_pin_clear(DCPIN);
+  pin_reset(_dcpin);
 }
 
 static void dchigh() {
-	gpio_pin_set(DCPIN);
+  pin_set(_dcpin);
 }
 
 static void transmit_command(ili9341_command_t cmd) {
@@ -180,9 +180,11 @@ static void command4(uint8_t cmd, uint8_t p1, uint8_t p2, uint8_t p3, uint8_t p4
 	transmit_data(p4);
 }
 
-void ili9341_enable() {
-	gpio_pin_mode(CSPIN, OUTPUT);
-	gpio_pin_mode(DCPIN, OUTPUT);
+void ili9341_enable(pin_t cspin, pin_t dcpin) {
+	_cspin = cspin;
+	_dcpin = dcpin;
+  pin_mode(_cspin, Output);
+  pin_mode(_dcpin, Output);
 	command(SOFTWARE_RESET);
 	//_delay_ms(50);
 	command(DISPLAY_OFF);

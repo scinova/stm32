@@ -6,8 +6,8 @@
 extern "C" {
 #endif
 uint32_t system_ticks();
-void system_set_hse_72mhz_clock();
-void system_init();
+void setup();
+void loop();
 #ifdef __cplusplus
 }
 #endif

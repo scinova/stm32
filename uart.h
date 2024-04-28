@@ -1,8 +1,8 @@
 #ifndef _uart_h
 #define _uart_h
-
 #include <stdint.h>
 #include <stdbool.h>
+#include "system.h"
 
 #if !defined(UART_TX_BUFFER_SIZE)
 #define UART_TX_BUFFER_SIZE 10
